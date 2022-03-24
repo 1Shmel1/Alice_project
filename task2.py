@@ -154,6 +154,20 @@ def play_game(res, req):
             res['response']['text'] = 'Правильно! Сыграем ещё?'
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
+            res['response']['buttons'] = [
+                {
+                    'title': 'Да',
+                    'hide': True
+                },
+                {
+                    'title': 'Нет',
+                    'hide': True
+                },
+                {
+                    'title': 'Помощь',
+                    'hide': True
+                }
+            ]
             return
         else:
             # если нет
@@ -165,6 +179,20 @@ def play_game(res, req):
                 res['response']['text'] = f'Вы пытались. Это {city.title()}. Сыграем ещё?'
                 sessionStorage[user_id]['game_started'] = False
                 sessionStorage[user_id]['guessed_cities'].append(city)
+                res['response']['buttons'] = [
+                    {
+                        'title': 'Да',
+                        'hide': True
+                    },
+                    {
+                        'title': 'Нет',
+                        'hide': True
+                    },
+                    {
+                        'title': 'Помощь',
+                        'hide': True
+                    }
+                ]
                 return
             else:
                 # иначе показываем следующую картинку
@@ -194,6 +222,7 @@ def get_first_name(req):
             # Если есть сущность с ключом 'first_name', то возвращаем её значение.
             # Во всех остальных случаях возвращаем None.
             return entity['value'].get('first_name', None)
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
